@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super IPTV Streams</title>
+    <style>
+        /* Global styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #121212;
+            margin: 0;
+            padding: 0;
+            color: #f3ecec;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 90%;
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #06df11;
+            text-shadow: 0 2px 5px rgb(238, 2, 81);
+        }
+
+        /* Grid styling */
+        .videoGrid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .videoLink {
+            background: #0c203fee;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(3, 204, 187, 0.849);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .videoLink:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(233, 6, 165, 0.966);
+        }
+
+        .thumbnail {
+            width: 90%;
+            height: 130px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .videoLink p {
+            margin: 0;
+            padding: 10px;
+            font-weight: bold;
+            background: #333;
+            color: hsl(293, 96%, 48%);
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        /* Video player and chat container styling */
+        .videoPlayerContainer {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+            margin-top: 30px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .videoPlayer {
+            flex: 3;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(11, 165, 31, 0.904);
+        }
+
+        iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+        }
+
+        .chatBox {
+            flex: 1;
+            background: #220430;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            padding: 10px;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .chatHeader {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #00e676;
+        }
+
+        .viewerCount {
+            margin-bottom: 10px;
+            color: #060af5;
+            font-size: 0.9rem;
+        }
+
+        .chatMessages {
+            flex: 1;
+            overflow-y: auto;
+            margin-bottom: 10px;
+        }
+
+        .chatInput {
+            display: flex;
+            gap: 10px;
+        }
+
+        .chatInput input {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background: #333;
+            color: #fff;
+        }
+
+        .chatInput button {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background: #00e676;
+            color: #121212;
+            cursor: pointer;
+        }
+
+        /* Footer styling */
+        .footer {
+            margin-top: 100px;
+            padding: 10px;
+            background: #1e1e1e;
+            color: #00e676;
+            text-align: center;
+            font-size: 0.9rem;
+            border-top: 1px solid #333;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .thumbnail {
+                height: 100px;
+            }
+
+            .videoPlayerContainer {
+                flex-direction: column;
+            }
+
+            .chatBox {
+                max-height: 300px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Super IPTV Streams</h1>
+        <div class="videoGrid">
+            <div class="videoLink" onclick="playVideo('https://sindikasi.inews.id/embed/video/YWdlbnQ9ZGVza3RvcCZ1cmw9aHR0cHMlM0ElMkYlMkZlbWJlZC5yY3RpcGx1cy5jb20lMkZsaXZlJTJGZ3R2JTJGaW5ld3NpZCZoZWlnaHQ9MTAwJTI1JndpZHRoPTEwMCUyNQ==')">
+                <img src="img/GTV.jpeg" alt="GTV-HD" class="thumbnail">
+                <p>GTV-HD</p>
+            </div>
+            <div class="videoLink" onclick="playVideo('https://www.cnnindonesia.com/tv/embed?ref=transmedia')">
+                <img src="img/CNN.png" alt="CNN-HD" class="thumbnail">
+                <p>CNN-HD</p>
+            </div>
+            <div class="videoLink" onclick="playVideo('https://www.cnbcindonesia.com/embed/tv')">
+                <img src="img/CNBC.png" alt="CNBC-ID" class="thumbnail">
+                <p>CNBC-ID</p>
+            </div>
+            <div class="videoLink" onclick="playVideo('https://sindikasi.inews.id/embed/video/YWdlbnQ9ZGVza3RvcCZ1cmw9aHR0cHMlM0ElMkYlMkZlbWJlZC5yY3RpcGx1cy5jb20lMkZsaXZlJTJGbW5jdHYlMkZpbmV3c2lkJmhlaWdodD0xMDAlMjUmd2lkdGg9MTAwJTI1')">
+                <img src="img/MNC.jpeg" alt="MNCTV-HD" class="thumbnail">
+                <p>MNCTV-HD</p>
+            </div>
+            <div class="videoLink" onclick="playVideo('https://sindikasi.inews.id/embed/video/YWdlbnQ9ZGVza3RvcCZ1cmw9aHR0cHMlM0ElMkYlMkZlbWJlZC5yY3RpcGx1cy5jb20lMkZsaXZlJTJGcmN0aSUyRmluZXdzaWQmaGVpZ2h0PTEwMCUyNSZ3aWR0aD0xMDAlMjU=')">
+                <img src="img/RCTI.jpeg" alt="RCTI-HD" class="thumbnail">
+                <p>RCTI-HD</p>
+            </div>
+            <div class="videoLink" onclick="playVideo('https://www.vidio.com/live/204-sctv-tv-stream/embed?autoplay=true&player_only=true&live_chat=false&mute=false&')">
+                <img src="img/SCTV.jpeg" alt="Vidio SCTV" class="thumbnail">
+                <p>Vidio SCTV</p>
+            </div>
+            <div class="videoLink" onclick="playVideo('https://www.youtube.com/embed/yNKvkPJl-tg')">
+                <img src="img/TVONE.jpeg" alt="YouTube Stream" class="thumbnail">
+                <p>TVONE-HD</p>
+            </div>
+            <div class="videoLink" onclick="playVideo('https://www.bbc.com/news/av/embed/p0969f9d')">
+                <img src="img/BBC.png" alt="BBC News" class="thumbnail">
+                <p>BBC News</p>
+            </div>
+            <div class="videoLink" onclick="playVideo('https://player.vimeo.com/video/76979871')">
+                <img src="img/Vimeo.png" alt="Vimeo Stream" class="thumbnail">
+                <p>Vimeo</p>
+            </div>
+            <div class="videoLink" onclick="playVideo('https://www.youtube.com/embed/jecpjiNTe3A')">
+                <img src="img/METRO.jpeg" alt="YouTube Stream" class="thumbnail">
+                <p>METROTV-HD</p>
+            </div>
+            <div class="videoLink" onclick="playVideo('https://www.youtube.com/embed/DOOrIxw5xOw')">
+                <img src="img/KOMPAS.jpeg" alt="YouTube Stream" class="thumbnail">
+                <p>KOMPASTV-HD</p>
+            </div>
+        </div>
+
+        <div class="videoPlayerContainer">
+            <div class="videoPlayer">
+                <iframe id="videoPlayer" allowfullscreen></iframe>
+            </div>
+            <div class="chatBox">
+                <div class="chatHeader">Live Chat</div>
+                <div class="viewerCount">Viewers: <span id="viewerCount">0</span></div>
+                <div class="chatMessages" id="chatMessages"></div>
+                <div class="chatInput">
+                    <input type="text" id="chatInput" placeholder="Type your message...">
+                    <button onclick="sendMessage()">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        &copy; 2024 Super IPTV. All rights reserved.
+    </footer>
+
+    <script>
+        function playVideo(url) {
+            // Add autoplay to YouTube URLs
+            if (url.includes("youtube.com")) {
+                url += (url.includes("?") ? "&" : "?") + "autoplay=1";
+            }
+            document.getElementById('videoPlayer').src = url;
+            updateViewers();
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            if (message) {
+                const chatMessages = document.getElementById('chatMessages');
+                const messageDiv = document.createElement('div');
+                messageDiv.textContent = message;
+                chatMessages.appendChild(messageDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+                input.value = '';
+            }
+        }
+
+        function updateViewers() {
+            const viewerCountElement = document.getElementById('viewerCount');
+            const randomViewers = Math.floor(Math.random() * 1000) + 1; // Simulate viewer count
+            viewerCountElement.textContent = randomViewers;
+        }
+
+        // Initial viewer update
+        updateViewers();
+    </script>
+</body>
+
+</html>
