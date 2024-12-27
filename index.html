@@ -10,13 +10,13 @@
         body {
             font-family: 'monospace', sans-serif;
             margin: 0;
-            padding: 100;
+            padding: 0;
             color: #f3ecec;
             display: flex;
             flex-direction: column;
             align-items: center;
             transition: background-color 0.3s, color 0.3s;
-             /* Background image */
+            /* Background image */
             background-size: cover;
             background-position: center;
         }
@@ -31,7 +31,7 @@
         body.light-mode {
             background-color: #f3f3f3;
             color: #121212;
-            background-image: url('img/with\ bg.jpg');
+            background-image: url('img/with bg.jpg');
         }
 
         /* Navbar styling */
@@ -232,10 +232,8 @@
             color: #fff;
             padding: 20px;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            text-align: center;
             justify-content: center;
+            align-items: center;
             border-bottom: 2px solid #ffee02;
             border-top: 2px solid #ffee02;
         }
@@ -275,7 +273,7 @@
             <a href="#">Home</a>
             <a href="#">Channels</a>
             <a href="#">About</a>
-            <a href="#">Contact</a>
+            <a href="wa.me/+6281329239362">Contact</a>
         </div>
         <div class="mode-toggle" onclick="toggleMode()">🌙</div>
     </div>
@@ -328,10 +326,11 @@
                 <p>KOMPASTV-HD</p>
             </div>
         </div>
+        
 
         <div class="videoPlayerContainer">
             <div class="videoPlayer" id="videoPlayerContainer">
-                <iframe id="videoPlayer" allowfullscreen></iframe>
+                <iframe id="videoPlayer" allow="autoplay" allowfullscreen></iframe>
             </div>
             <div class="chatBox">
                 <div class="chatHeader">Live Chat</div>
@@ -362,7 +361,12 @@
         }
 
         function playVideo(url) {
-            document.getElementById('videoPlayer').src = url;
+            const videoPlayer = document.getElementById('videoPlayer');
+            videoPlayer.src = url + '?autoplay=1';
+
+            const playerContainer = document.getElementById('videoPlayerContainer');
+            playerContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
             updateViewers();
         }
 
