@@ -8,25 +8,78 @@
     <style>
         /* Global styling */
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'monospace', sans-serif;
             margin: 0;
             padding: 100;
             color: #f3ecec;
             display: flex;
-            flex-direction:column;
+            flex-direction: column;
             align-items: center;
             transition: background-color 0.3s, color 0.3s;
+             /* Background image */
+            background-size: cover;
+            background-position: center;
         }
 
         /* Mode dark and light */
         body.dark-mode {
             background-color: #121212;
             color: #f3ecec;
+            background-image: url('img/background.jpg');
         }
 
         body.light-mode {
             background-color: #f3f3f3;
             color: #121212;
+            background-image: url('img/with\ bg.jpg');
+        }
+
+        /* Navbar styling */
+        .navbar {
+            width: 100%;
+            background: #5a0096;
+            color: #fff;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 4px solid #ffee02;
+            border-top: 4px solid #ffee02;
+        }
+
+        .navbar .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            padding: 5px;
+        }
+
+        .navbar .links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .navbar .links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s;
+            border-bottom: #f3f3f3;
+        }
+
+        .navbar .links a:hover {
+            color: #00e676;
+        }
+
+        .navbar .mode-toggle {
+            cursor: pointer;
+            color: #ff0379;
+            font-size: 1.2rem;
+            padding: 4px;
+            border-radius: 50%;
+            background: #121212;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         /* Container styling */
@@ -41,23 +94,10 @@
 
         /* Seven segment font for h1 */
         .seven-segment {
-            font-family: 'Digital-7', monospace;
+            font-family: 'Digital-7', sans-serif;
             font-size: 3rem;
             margin-bottom: 20px;
             text-align: center;
-        }
-
-        /* Icon for dark/light mode toggle */
-        .mode-toggle {
-            position: relative;
-            top: 20px;
-            left: 110px;
-            cursor: pointer;
-            color: #ff0379;
-            font-size: 1rem;
-            padding: 5px; /* Add padding to push the icon inwards */
-            border-radius: 50%;
-            background: #121212;
         }
 
         /* Grid styling */
@@ -66,9 +106,9 @@
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 15px;
             margin-top: 15px;
-            border-top: 1px solid #fff;
-            border-bottom: 1px solid #6d026d;
-            padding: 10px 0;
+            border-top: 5px solid #fa0202;
+            border-bottom: 5px solid #ff0202;
+            padding: 15px 0;
         }
 
         .videoLink {
@@ -120,6 +160,8 @@
             border-radius: 0;
             overflow: hidden;
             box-shadow: 0 4px 8px rgba(6, 10, 236, 0.904);
+            border-top: 5px solid #fa0202;
+            border-bottom: 5px solid #ff0202;
         }
 
         iframe {
@@ -185,15 +227,17 @@
 
         /* Footer styling */
         .footer {
-            margin-top: 10px;
-            padding: 10px;
-            background: #fffafa;
-            color: #ff0404;
-            text-align: center;
-            font-size: 0.9rem;
-            border-top: 1px solid #fff;
+            width: 100%;
+            background: #11034e;
+            color: #fff;
+            padding: 20px;
             display: flex;
-            
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+            justify-content: center;
+            border-bottom: 2px solid #ffee02;
+            border-top: 2px solid #ffee02;
         }
 
         /* Responsive Design */
@@ -225,7 +269,17 @@
 </head>
 
 <body class="light-mode">
-    <div class="mode-toggle" onclick="toggleMode()">🌙</div>
+    <div class="navbar">
+        <div class="logo">Super IPTV</div>
+        <div class="links">
+            <a href="#">Home</a>
+            <a href="#">Channels</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+        </div>
+        <div class="mode-toggle" onclick="toggleMode()">🌙</div>
+    </div>
+
     <div class="container">
         <h1 class="seven-segment">Super IPTV Streams</h1>
         <div class="videoGrid">
@@ -275,7 +329,6 @@
             </div>
         </div>
 
-
         <div class="videoPlayerContainer">
             <div class="videoPlayer" id="videoPlayerContainer">
                 <iframe id="videoPlayer" allowfullscreen></iframe>
@@ -309,20 +362,8 @@
         }
 
         function playVideo(url) {
-            // Add autoplay to all video URLs (including non-YouTube links)
-            if (!url.includes("autoplay")) {
-                if (url.includes("youtube.com")) {
-                    url += (url.includes("?") ? "&" : "?") + "autoplay=true";
-                } else if (url.includes("vimeo.com") || url.includes("vidio.com") || url.includes("detik.com")) {
-                    url += (url.includes("?") ? "&" : "?") + "autoplay=true";
-                }
-            }
-            // Update the iframe with the selected video URL
             document.getElementById('videoPlayer').src = url;
             updateViewers();
-
-            // Scroll to the video player container
-            document.getElementById('videoPlayerContainer').scrollIntoView({ behavior: 'smooth' });
         }
 
         function sendMessage() {
